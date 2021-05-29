@@ -24,10 +24,11 @@ Searching Algorithms:
         2. Binary Search
 """
 
+
 # Testing Function to test if a array is sorted.
 def isSorted(array):
     for i in range(1, len(array)):
-        if array[i] < array[i-1]:
+        if array[i] < array[i - 1]:
             return False
     return True
 
@@ -46,22 +47,23 @@ def selectionSort(array):
     """
     for i in range(len(array)):
         smallest_idx = i
-        for j in range(i+1, len(array)):
+        for j in range(i + 1, len(array)):
             if array[j] < array[smallest_idx]:
                 smallest_idx = j
         # swap
         array[i], array[smallest_idx] = array[smallest_idx], array[i]
-    
+
     return array
 
 
 # Testing selection sort
-array = [2,4,2,5,6,1,-2,3,14]
+array = [2, 4, 2, 5, 6, 1, -2, 3, 14]
 print('Classic Algorithms:')
 print(f'My array is {array}')
 print(f'1. After Selection sort, my array is {selectionSort(array)}')
-print(f'Array {"is" if isSorted(selectionSort(array)) else "is not" } sorted.')
-print('-'*70)
+print(f'Array {"is" if isSorted(selectionSort(array)) else "is not"} sorted.')
+print('-' * 70)
+
 
 # 2. Insertion Sort
 def insertionSort(array):
@@ -72,23 +74,23 @@ def insertionSort(array):
     Space Complexity = O(1)
     Stability: stable
     """
-    for i in range (1, len(array)):
+    for i in range(1, len(array)):
         cur_ele = array[i]
         k = i - 1
         while k >= 0 and array[k] > cur_ele:
-            array[k+1] = array [k]            
+            array[k + 1] = array[k]
             k -= 1
 
-        array[k+1] = cur_ele
+        array[k + 1] = cur_ele
     return array
 
 
 # Testing insertion sort
-array = [2,4,2,5,6,1,-2,3,14]
+array = [2, 4, 2, 5, 6, 1, -2, 3, 14]
 print(f'My array is {array}')
 print(f'2. After insertion sort, my array is {insertionSort(array)}')
-print(f'Array {"is" if isSorted(insertionSort(array)) else "is not" } sorted.')
-print('-'*70)
+print(f'Array {"is" if isSorted(insertionSort(array)) else "is not"} sorted.')
+print('-' * 70)
 
 
 # 3. Bubble Sort
@@ -105,19 +107,20 @@ def bubbleSort(array):
     Space Complexity = O(1)
     Stability: stable
     """
-    for i in range(len(array)-1):
-        for j in range(len(array)-1-i):
-            if array[j] > array[j+1]:
-                array[j], array[j+1] = array[j+1], array[j]
+    for i in range(len(array) - 1):
+        for j in range(len(array) - 1 - i):
+            if array[j] > array[j + 1]:
+                array[j], array[j + 1] = array[j + 1], array[j]
     return array
 
 
 # Testing bubble sort
-array = [2,4,2,5,6,1,-2,3,14]
+array = [2, 4, 2, 5, 6, 1, -2, 3, 14]
 print(f'My array is {array}')
 print(f'3. After bubble sort, my array is {bubbleSort(array)}')
-print(f'Array {"is" if isSorted(bubbleSort(array)) else "is not" } sorted.')
-print('-'*70)
+print(f'Array {"is" if isSorted(bubbleSort(array)) else "is not"} sorted.')
+print('-' * 70)
+
 
 # 4. Merge Sort
 def mergeSort(array):
@@ -131,25 +134,26 @@ def mergeSort(array):
     Space Complexity =  O(n) || It requires more space to store the splitted elements.
     Stability: stable
     """
-    if len(array) <= 1: # Base case
+    if len(array) <= 1:  # Base case
         return array
-    
-    mid = len(array) // 2 # Set the mid point
+
+    mid = len(array) // 2  # Set the mid point
     left = array[:mid]
     right = array[mid:]
-    
-    left = mergeSort(left) 
-    right = mergeSort(right) # Using recursion cutting the array into half until we get every single element.
-    
-    return merge_two_arrays(left, right, array) 
-    
 
-def merge_two_arrays(left, right, array): # using this function to keep merging sub-arrays till it becomes to a entire array
-    
-    i = j = k = 0 # i -> idx of left array | j -> idx of right array | k -> idx of original array.
-    
-    
-    while i < len(left) and j < len(right): # each time we compare each ele in both L & R. Place the smaller one into orignial array.
+    left = mergeSort(left)
+    right = mergeSort(right)  # Using recursion cutting the array into half until we get every single element.
+
+    return merge_two_arrays(left, right, array)
+
+
+def merge_two_arrays(left, right,
+                     array):  # using this function to keep merging sub-arrays till it becomes to a entire array
+
+    i = j = k = 0  # i -> idx of left array | j -> idx of right array | k -> idx of original array.
+
+    while i < len(left) and j < len(
+            right):  # each time we compare each ele in both L & R. Place the smaller one into orignial array.
         if left[i] <= right[j]:
             array[k] = left[i]
             i += 1
@@ -158,26 +162,27 @@ def merge_two_arrays(left, right, array): # using this function to keep merging 
             array[k] = right[j]
             j += 1
             k += 1
-    
+
     while i < len(left):  # if one of the sub-arrays runs out, keep adding the rest elements. 
         array[k] = left[i]
         i += 1
         k += 1
-    
+
     while j < len(right):
         array[k] = right[j]
         j += 1
         k += 1
-    
+
     return array
+
 
 # Testing merge sort
 print('Advanced Algorithms: ')
-array = [2,4,2,5,6,1,-2,3,14]
+array = [2, 4, 2, 5, 6, 1, -2, 3, 14]
 print(f'My array is {array}')
 print(f'4. After merge sort, my array is {mergeSort(array)}')
-print(f'Array {"is" if isSorted(mergeSort(array)) else "is not" } sorted.')
-print('-'*70)
+print(f'Array {"is" if isSorted(mergeSort(array)) else "is not"} sorted.')
+print('-' * 70)
 
 
 # 5. Quick Sort
@@ -194,27 +199,27 @@ def quickSort(array):
     if len(array) <= 1:
         return array  # base case
     else:
-        pivot = array.pop() # get the last element as the pivot. 
-    
+        pivot = array.pop()  # get the last element as the pivot.
+
     # partition step
     lower_ele = []
     higher_ele = []
-    
+
     for ele in array:
         if ele <= pivot:
             lower_ele.append(ele)
         else:
             higher_ele.append(ele)
-    
+
     return quickSort(lower_ele) + [pivot] + quickSort(higher_ele)
-    
-    
+
+
 # Testing Quick sort
-array = [2,4,2,5,6,1,-2,3,14]
+array = [2, 4, 2, 5, 6, 1, -2, 3, 14]
 print(f'My array is {array}')
 print(f'5. After quick sort, my array is {quickSort(array)}')
-print(f'Array {"is" if isSorted(quickSort(array)) else "is not" } sorted.')
-print('-'*70)
+print(f'Array {"is" if isSorted(quickSort(array)) else "is not"} sorted.')
+print('-' * 70)
 
 
 # 6. Heap Sort
@@ -234,50 +239,51 @@ def heapSort(array):
     """
     length = len(array)
     # Build up a max heap
-    for i in reversed(range(length//2 +1)): # start from the mid, traverse backwards 1 at a time till the 1st element.
+    for i in reversed(
+            range(length // 2 + 1)):  # start from the mid, traverse backwards 1 at a time till the 1st element.
         heapify(array, length, i)
-        
 
     # Heap sort
-    for j in reversed(range(length)): # start from the end, traverse backwards 1 at a time till the 2nd element.
-        
+    for j in reversed(range(length)):  # start from the end, traverse backwards 1 at a time till the 2nd element.
+
         # Swap the root (largest) of the heap to the tail 
         array[j], array[0] = array[0], array[j]
-        
+
         # Remove the tail & Heapify the root
         heapify(array, j, 0)
-    
+
     return array
+
 
 def heapify(array, heap_size, parentIdx):
     """
     Takes in parentIdx and find out if the parent node is the largest among its children. If not, swap the largest to the parent. 
     """
-    
-    largest = parentIdx # assume the parent is the largest.
-    
-    left = 2*parentIdx + 1 # left child = 2*i+1
-    right = 2*parentIdx + 2 # right child = 2*i+2
-    
-    
+
+    largest = parentIdx  # assume the parent is the largest.
+
+    left = 2 * parentIdx + 1  # left child = 2*i+1
+    right = 2 * parentIdx + 2  # right child = 2*i+2
+
     # check if children are larger than the parent.
-    if left < heap_size and array[largest] < array[left]:  
+    if left < heap_size and array[largest] < array[left]:
         largest = left
-        
-    if right < heap_size and array[largest] < array[right]: 
+
+    if right < heap_size and array[largest] < array[right]:
         largest = right
-    
+
     # if the largest one has been replaced: 1. swap parent and child. 2. recursivly call heapify till the child's children are heapified.
     if largest != parentIdx:
         array[parentIdx], array[largest] = array[largest], array[parentIdx]
         heapify(array, heap_size, largest)
 
+
 # Testing Heap sort
-array = [2,4,2,5,6,1,-2,3,14]
+array = [2, 4, 2, 5, 6, 1, -2, 3, 14]
 print(f'My array is {array}')
 print(f'6. After heap sort, my array is {heapSort(array)}')
-print(f'Array {"is" if isSorted(heapSort(array)) else "is not" } sorted.')
-print('-'*70)
+print(f'Array {"is" if isSorted(heapSort(array)) else "is not"} sorted.')
+print('-' * 70)
 
 
 # 7. Counting Sort
@@ -301,31 +307,32 @@ def countingSort(array):
     Stability: stable
     """
     size = len(array)
-    
-    output = [0] * size # initialize the output array (length = original array) filled with 0 
-    count = [0] * (max(array)+1) # initialize the counting array (length = the max element of the array + 1) filled with 0 
-    
-    for i in range(len(array)): # count the occurrences of the array.
+
+    output = [0] * size  # initialize the output array (length = original array) filled with 0
+    count = [0] * (max(
+        array) + 1)  # initialize the counting array (length = the max element of the array + 1) filled with 0
+
+    for i in range(len(array)):  # count the occurrences of the array.
         count[array[i]] += 1
 
-    for i in range(1, len(count)): # accumulate the sum of the occurences
-        count[i] += count[i-1]
-    
+    for i in range(1, len(count)):  # accumulate the sum of the occurences
+        count[i] += count[i - 1]
+
     for num in array:
-        pos = count[num] - 1 # map the element from original array to count array 
-        count[num] = pos # update the count array
-        output[pos] = num # place the element in sorted array.
-        
+        pos = count[num] - 1  # map the element from original array to count array
+        count[num] = pos  # update the count array
+        output[pos] = num  # place the element in sorted array.
+
     return output
-    
-    
+
+
 # Testing counting sort
 print('Other Algorithms:')
-array = [2,4,2,4,10,1,3,6]
+array = [2, 4, 2, 4, 10, 1, 3, 6]
 print(f'My array is {array}')
 print(f'7. After counting sort, my array is {countingSort(array)}')
-print(f'Array {"is" if isSorted(countingSort(array)) else "is not" } sorted.')
-print('-'*70)
+print(f'Array {"is" if isSorted(countingSort(array)) else "is not"} sorted.')
+print('-' * 70)
 
 
 # 8. Radix Sort
@@ -345,48 +352,47 @@ def radixSort(array):
     Stability: stable
     """
     # Get the maximum element
-    max_element = max(array) 
-    
+    max_element = max(array)
+
     # Apply counting sort to help sort elements based on place value
     place = 1
     while max_element // place > 0:
         countingSortHelper(array, place)
         place *= 10
-    
+
     return array
 
-def countingSortHelper(array, place):
 
+def countingSortHelper(array, place):
     size = len(array)
-    
+
     output = [0] * size
     count = [0] * 10  # obviously the value range of each place is from 0 to 9, so we initialize 10 empty space.
-    
-    for i in range(size): # count occurrences
-        index = array[i] // place 
-        count[index % 10] += 1 # locating the number of that particular place.
 
-    for i in range(1, 10): # accumulate 
-        count[i] += count[i-1]
-    
-
-    for i in reversed(range(len(array))): # Note: this step requires reversed traversal, because the larger number needs to be placed behind.
+    for i in range(size):  # count occurrences
         index = array[i] // place
-        pos = count[index % 10]-1
+        count[index % 10] += 1  # locating the number of that particular place.
+
+    for i in range(1, 10):  # accumulate
+        count[i] += count[i - 1]
+
+    for i in reversed(range(len(
+            array))):  # Note: this step requires reversed traversal, because the larger number needs to be placed behind.
+        index = array[i] // place
+        pos = count[index % 10] - 1
         count[index % 10] = pos
         output[pos] = array[i]
-    
+
     for i in range(size):
         array[i] = output[i]
-        
+
 
 # Testing Radix sort
 array = [121, 432, 564, 23, 1, 45, 788]
 print(f'My array is {array}')
 print(f'8. After Radix sort, my array is {radixSort(array)}')
-print(f'Array {"is" if isSorted(radixSort(array)) else "is not" } sorted.')
-print('-'*70)
-
+print(f'Array {"is" if isSorted(radixSort(array)) else "is not"} sorted.')
+print('-' * 70)
 
 
 # 9. Bucket Sort
@@ -409,34 +415,34 @@ def bucketSort(array):
     """
     buckets = []
     output = []
-    
+
     # Create empty buckets
     for _ in range(len(array)):
         buckets.append([])
-    
+
     # Insert elements into their respective buckets
     for element in array:
         index = int(10 * element)
         buckets[index].append(element)
-    
+
     # Sort the elements of each bucket
     for i in range(len(array)):
-        buckets[i] = sorted(buckets[i]) # feel free to use any other sorting algorithm i.e. insertion sort
-    
+        buckets[i] = sorted(buckets[i])  # feel free to use any other sorting algorithm i.e. insertion sort
+
     # append the sorted element into output array
     for bucket in buckets:
         for ele in bucket:
-           output.append(ele) 
-        
+            output.append(ele)
+
     return output
+
 
 # Testing Bucket sort
 array = [.42, .32, .33, .52, .37, .47, .51]
 print(f'My array is {array}')
 print(f'9. After Bucket sort, my array is {bucketSort(array)}')
-print(f'Array {"is" if isSorted(bucketSort(array)) else "is not" } sorted.')
-print('-'*70)
-
+print(f'Array {"is" if isSorted(bucketSort(array)) else "is not"} sorted.')
+print('-' * 70)
 
 
 # 10. Shell Sort
@@ -464,10 +470,10 @@ def shellSort(array):
         gap //= 2
     return array
 
-    
+
 # Testing Shell sort
-array = [2,4,2,5,6,1,-2,3,14]
+array = [2, 4, 2, 5, 6, 1, -2, 3, 14]
 print(f'My array is {array}')
 print(f'10. After Shell sort, my array is {shellSort(array)}')
-print(f'Array {"is" if isSorted(shellSort(array)) else "is not" } sorted.')
-print('-'*70)
+print(f'Array {"is" if isSorted(shellSort(array)) else "is not"} sorted.')
+print('-' * 70)
